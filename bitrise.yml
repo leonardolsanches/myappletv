@@ -1,0 +1,6 @@
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+workflows:
+  primary:
+    steps:
+      - xcode-build-for-testing@1: {}
