@@ -1,6 +1,16 @@
 format_version: '11'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+project_type: ios
+
 workflows:
   primary:
     steps:
-      - xcode-build-for-testing@1: {}
+      - git-clone: {}
+      - xcode-archive:
+          inputs:
+            - project_path: CameraViewerBitriseReady.xcodeproj
+            - scheme: CameraViewerBitriseReady
+            - export_method: development
+            - distribution_method: development
+      - deploy-to-bitrise-io: {}
