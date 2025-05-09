@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+    <scene sceneID="tne-QT-ifu">
+        <objects>
+            <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CameraViewer" customModuleProvider="target">
+                <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <subviews>
+                        <label opaque="NO" contentMode="left" text="Camera Viewer" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="label">
+                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="48"/>
+                            <color key="textColor" white="1" alpha="1"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="button">
+                            <state key="normal" title="Carregar Câmera"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                            <connections>
+                                <action selector="loadCameraButtonTapped:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="action"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="videoView"/>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="label" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="label-top"/>
+                        <constraint firstItem="label" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="label-centerX"/>
+                        <constraint firstItem="button" firstAttribute="top" secondItem="label" secondAttribute="bottom" constant="50" id="button-top"/>
+                        <constraint firstItem="button" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="button-centerX"/>
+                        <constraint firstItem="videoView" firstAttribute="top" secondItem="button" secondAttribute="bottom" constant="50" id="videoView-top"/>
+                        <constraint firstItem="videoView" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="videoView-leading"/>
+                        <constraint firstItem="videoView" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" constant="-50" id="videoView-trailing"/>
+                        <constraint firstItem="videoView" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-50" id="videoView-bottom"/>
+                    </constraints>
+                </view>
+                <connections>
+                    <outlet property="videoView" destination="videoView" id="videoView-outlet"/>
+                </connections>
+            </viewController>
+        </objects>
+    </scene>
+</document>

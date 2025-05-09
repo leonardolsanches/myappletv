@@ -1,0 +1,46 @@
+workflows:
+  tvos-workflow:
+    name: CameraViewer tvOS Build
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      vars:
+        XCODE_PROJECT: "CameraViewer.xcodeproj"
+        XCODE_SCHEME: "CameraViewer"
+        BUNDLE_ID: "com.seuNome.CameraViewer"
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: "main"
+          include: true
+          source: true
+    scripts:
+      - name: Set up keychain for code signing
+        script: |
+          keychain initialize
+      - name: Fetch signing files
+        script: |
+          app-store-connect fetch-signing-files $BUNDLE_ID --type APPLE_TVOS --create
+      - name: Add certificates to keychain
+        script: |
+          keychain add-certificates
+      - name: Set up code signing settings
+        script: |
+          xcode-project use-profiles
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa --project "$XCODE_PROJECT" --scheme "$XCODE_SCHEME" --sdk appletvos
+    artifacts:
+      - build/tvos/ipa/*.ipa
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      email:
+        recipients:
+          - seu.email@example.com
+        notify:
+          success: true
+          failure: true
